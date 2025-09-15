@@ -1,39 +1,94 @@
 import random
 
-user_wins = 0
-computer_wins = 0
+print("Welcome to the Rock, Paper and Scissors game!")
+print("Rules are simple, whoever have the most wins out of 3 is the overall winner.")
+print("Write 'r' for Rock\nWrite 'p' for Paper\nWrite 's' for scissors")
+emojis = {
+    "r": "\u270A",
+    "p": "\u270B",
+    "s": "\u270C"
+    
+}
 
-options = ["rock", "paper", "scissors"]
+user_win_count = 0
+tie_count = 0
+comp_win_count = 0
+count = 0
 
 while True:
-    user_input = input("Enter Rock/paper/scissors or Q to quit the game: ").lower()
+    count += 1
+    user_input = input("Choose from Rock, Paper, Scissor (r, p, or s): ").lower().strip()
+    comp_input = random.choice(["r", "s", "p"])
 
-    if user_input == "q":
-        break
-    
-    if user_input not in options:
-        continue
-    
-    random_num = random.randint(0,2)
-    computer_input = options[random_num]
-    
-    if user_input == "rock" and computer_input == "scissors":
-        print("You won!")
-        user_wins += 1
+    if user_input == "r":
+        print(f"You chose {emojis[user_input]}")
+        if comp_input == "r":
+            print(f"Computer chose {emojis[comp_input]}")
+            print("It's a tie!")
+            tie_count += 1
         
-    elif user_input == "paper" and computer_input == "rock":
-        print("You won!")
-        user_wins += 1
-    
-    elif user_input == "scissors" and computer_input == "paper":
-        print("You won!")
-        user_wins += 1
+        elif comp_input == "p":
+            print(f"Computer chose {emojis[comp_input]}")
+            print("You lose!")
+            comp_win_count += 1
+        
+        elif comp_input == "s":
+            print(f"Computer chose {emojis[comp_input]}")
+            print("You win!")
+            user_win_count += 1
+            
+    elif user_input == "p":
+        print(f"You chose {emojis[user_input]}")
+        if comp_input == "r":
+            print(f"Computer chose {emojis[comp_input]}")
+            print("You win!")
+            user_win_count += 1
+        
+        elif comp_input == "p":
+            print(f"Computer chose {emojis[comp_input]}")
+            print("It's a tie!")
+            tie_count += 1
+        
+        elif comp_input == "s":
+            print(f"Computer chose {emojis[comp_input]}")
+            print("You lose!")
+            comp_win_count += 1
+            
+    elif user_input == "s":
+        print(f"You chose {emojis[user_input]}")
+        if comp_input == "r":
+            print(f"Computer chose {emojis[comp_input]}")
+            print("You lose!")
+            comp_win_count += 1
+        
+        elif comp_input == "p":
+            print(f"Computer chose {emojis[comp_input]}")
+            print("You win!")
+            user_win_count += 1
+        
+        elif comp_input == "s":
+            print(f"Computer chose {emojis[comp_input]}")
+            print("It's a tie!")
+            tie_count += 1
     
     else:
-        print("You lost!")
-        computer_wins += 1
-        
-print("You won", user_wins, "times.")
-print("Computer won", computer_wins, "times.")
-print("Goodbye!")
+        print("Please enter a valid input.")
+        continue
+    
+    if count == 3:
+        break
+    # permission = input("Do you want to continue? Yes or No (y/n) ").lower().strip()
+    # if permission == "n":
+    #     break
+
+print(f"Your wins = {user_win_count}\nComupter wins = {comp_win_count}\nTies = {tie_count}")
+
+if user_win_count >= 2:
+    print(f"Overall winner is You")
+
+else:
+    print(f"Overall winner is Computer")
+
+
+print("Thanks for playing the game! Come again next time")
 
