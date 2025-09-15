@@ -1,34 +1,30 @@
 import random
 
-range_of_number = input("Enter a number: ")
-
-if range_of_number.isdigit():
-    range_of_number = int(range_of_number)
-else:
-    print("Wrong Input! Enter a number next time.")
-    quit()
-
-random_number = random.randint(0, range_of_number)
-guesses = 0
+print("Welcome to the Guesser Game.\nRule is simple- computer will choose a number and you will have to guess it.")
+range_of_secret_num = int(input("What should be the highest range of the secret number? "))
+secret_num = random.randint(1, range_of_secret_num)
+count = 0
 
 while True:
-    guesses += 1
-    user_guess = input("Guess the number: ")
-    if user_guess.isdigit():
-        user_guess = int(user_guess)
-    else:
-        print("Wrong input!")
-        quit()
-        
-    if user_guess == random_number:
-        print("You got it!")
-        break
-        
-    elif user_guess > random_number:
-        print("Your guess was higher!")
+    user_guess = int(input(f"Guess the number between 1 and {range_of_secret_num} : "))
+    if user_guess < secret_num:
+        print("Your guess was too low, try again.")
+        count += 1
+        continue
     
-    elif user_guess < random_number:
-        print("Your guess was lower!")
+    elif user_guess > secret_num:
+        print("Your guess was too high, try again.")
+        count += 1
+        continue
+    
+    else:
+        print("Congrats! you guessed it right.")
+        count += 1
+        print(f"It took you {count} times to guess the number.")
+        break
+    
         
-        
-print("You guessed the number in", guesses, "times")
+    
+    
+#should give hints like too low or too high
+#on correct guess, give thanks and no of counts it took
